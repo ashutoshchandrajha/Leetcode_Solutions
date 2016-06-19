@@ -1,0 +1,29 @@
+class Solution(object):
+    def __init__(self):
+        self.v_stack = []
+        self.l = []
+
+    def reverseVowels(self, s):
+        vowel = ["a","e","i","o","u","A","E","I","O","U"]
+        self.l = list(s)
+        for i in range(len(self.l)):
+            if self.l[i] in vowel:
+                print (self.l[i])
+                self.stack_push(self.l[i],i)
+        for i in range(len(self.l)):
+            if self.l[i] is None:
+                self.l[i] = self.stack_pop()
+        new_str = ''.join(self.l[i] for i in range(len(self.l)))
+        return new_str
+
+    def stack_push(self,val,index):
+        self.v_stack.append(val)
+        print(len(self.l))
+        self.l[index] = None
+
+    def stack_pop(self):
+        return self.v_stack.pop()
+
+s = Solution()
+r = s.reverseVowels("Hello")
+print(r)
