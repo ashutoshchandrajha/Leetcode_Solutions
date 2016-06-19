@@ -1,0 +1,31 @@
+class Solution(object):
+    def canWinNim(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        self.moves = {0:0,1:1,2:2,3:3,4:0,5:1,6:2,7:3,8:0}
+        if n>8:
+            n=n%8
+        return self.my_turn(n)
+
+
+    def my_turn(self, n):
+        if self.moves[n]==0:
+            return False
+        elif n<=3:
+            return True
+        else:
+            return self.friends_turn(n-self.moves[n])
+
+    def friends_turn(self,n):
+        if self.moves[n]==0:
+            return True
+        elif n<=3:
+            return True
+        else:
+            return self.my_turn(n-self.moves[n])
+            
+s = Solution()
+k = s.canWinNim(4)
+print(k)
