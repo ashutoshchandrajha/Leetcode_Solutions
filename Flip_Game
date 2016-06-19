@@ -1,0 +1,28 @@
+class Solution(object):
+    def generatePossibleNextMoves(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        l = []
+        slist = list(s)
+        return self.my_turn(slist,l)
+
+    def my_turn(self,s,l):
+        i = len(s)
+        if len(s)<2:
+            return l
+        i=0
+        while i<len(s)-1:
+            if s[i]=="+" and s[i+1]=="+":
+                new_str = list(s)
+                new_str[i] = "-"
+                new_str[i+1] = "-"
+                new_str = ''.join(c for c in new_str)
+                l.append(new_str)
+            i+=1
+        return l
+
+s = Solution()
+k = s.generatePossibleNextMoves("++++")
+print(k)
