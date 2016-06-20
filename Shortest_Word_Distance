@@ -1,0 +1,23 @@
+class Solution(object):
+    def shortestDistance(self, words, word1, word2):
+        """
+        :type words: List[str]
+        :type word1: str
+        :type word2: str
+        :rtype: int
+        """
+        distance = len(words)
+        i = 0       #tracking word1
+        j = 0       #tracking word2
+        seen_word1=False
+        seen_word2=False
+        for k in range(len(words)):
+            if words[k]==word1:
+                i=k
+                seen_word1=True
+            elif words[k]==word2:
+                j=k
+                seen_word2=True
+            if seen_word1 and seen_word2:
+                distance = min(distance,abs(i-j))
+        return distance
