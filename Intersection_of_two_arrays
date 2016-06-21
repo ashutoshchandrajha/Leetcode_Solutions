@@ -1,0 +1,20 @@
+class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        d1 = {}
+        d2 = {}
+        l =  []
+        for i in range(len(nums1)):
+            if nums1[i] not in d1:
+                d1[nums1[i]]=True
+        for i in range(len(nums2)):
+            if nums2[i] not in d2:
+                d2[nums2[i]]=True
+        for key in d1:
+            if key in d2:
+                l.append(key)
+        return l
