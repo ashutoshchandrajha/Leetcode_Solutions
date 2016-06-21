@@ -1,0 +1,87 @@
+class Empty(Exception):
+    pass
+
+class LinkedTree():
+
+    class Node():
+        __slots__ = 'parent','left','right','element'
+        def __init__(self,element):
+            self.parent=None
+            self.left=None
+            self.right=None
+            self.element=element
+
+    def __init__(self):
+        self.root = None
+        self.size = 0
+
+    def __len__(self):
+        return self.size
+
+    def is_empty(self):
+        return self.size==0
+
+    def insert(self,e):
+        node = self.Node(e)
+        if self.is_empty():
+            self.root = node
+            self.size+=1
+            return
+        temp = None
+        current = self.root
+        while current is not None:
+            temp = current
+            if e < current.element:
+                current = current.left
+            else:
+                current = current.right
+        node.parent=temp
+        if e < temp.element:
+            temp.left=node
+        else:
+            temp.right=node
+        self.size+=1
+
+    def inorder(self):
+        self.inorder_helper(self.root)
+
+    def inorder_helper(self,root):
+        if root is not None:
+            self.inorder_helper(root.left)
+            print(root.element)
+            self.inorder_helper(root.right)
+
+    def invertTree(self):
+        q = []
+        q = self.parse(self.root,q)
+        self.invert(self.root,q)
+        return self.root
+
+
+    def parse(self,root,q):
+        if root != None:
+            q.append(root.element)
+            self.parse(root.right,q)
+            self.parse(root.left,q)
+        return q
+
+    def invert(self,root,q):
+        if root != None:
+            root.element = q.pop(0)
+            self.invert(root.left,q)
+            self.invert(root.right,q)
+
+l1 = LinkedTree()
+l1.insert(4)
+l1.insert(5)
+l1.insert(3)
+l1.insert(8)
+l1.insert(2)
+l1.insert(9)
+l1.insert(1)
+
+
+l1.inorder()
+l1.invertTree()
+print("Inverted")
+l1.inorder()
