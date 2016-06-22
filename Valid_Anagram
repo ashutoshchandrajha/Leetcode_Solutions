@@ -1,0 +1,24 @@
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        i = {}       #tracks s
+        j = {}       #tracks t
+        if len(s)!=len(t):
+            return False
+        for k in range(len(s)):
+            if s[k] not in i:
+                i[s[k]] = 1
+            else:
+                i[s[k]] += 1
+            if t[k] not in j:
+                j[t[k]] = 1
+            else:
+                j[t[k]] += 1
+        if i == j:
+            return True
+        else:
+            return False
