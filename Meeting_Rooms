@@ -1,0 +1,39 @@
+# Definition for an interval.
+# class Interval(object):
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
+
+class Solution(object):
+    def canAttendMeetings(self, intervals):
+        """
+        :type intervals: List[Interval]
+        :rtype: bool
+        """
+        k = True
+        if len(intervals)<2:
+            return True
+        self.quick_sort(intervals,0,len(intervals)-1)
+        for i in range(len(intervals)-1):
+            if intervals[i].start<=intervals[i].end and intervals[i].end<=intervals[i+1].start:
+                pass
+            else:
+                return False
+        return k
+
+    def quick_sort(self,x,start,stop):
+        if start<stop:
+            p = self.partition(x,start,stop)
+            self.quick_sort(x,start,p-1)
+            self.quick_sort(x,p+1,stop)
+
+    def partition(self,x,start,stop):
+        pivot = x[stop].start
+        pIndex = start
+
+        for j in range(start,stop):
+            if x[j].start<pivot:
+                x[j],x[pIndex]=x[pIndex],x[j]
+                pIndex += 1
+        x[pIndex],x[stop]=x[stop],x[pIndex]
+        return pIndex
