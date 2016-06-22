@@ -1,0 +1,32 @@
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        a = min(p.val,q.val)
+        b = max(p.val,q.val)
+        return self.preorder(root,a,b)
+
+    def preorder(self,root,p,q):
+        if root is not None:
+            if root.val == p or root.val == q:
+                return root
+            if (p<root.val and q>root.val):
+                return root
+            left = self.preorder(root.left,p,q)
+            right = self.preorder(root.right,p,q)
+            
+            if left != None and right != None:
+                return root;
+
+
+            if left != None:
+                return left
+
+            if right != None:
+                return right;
+        
+        return None
