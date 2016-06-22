@@ -1,0 +1,20 @@
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head == None:
+            return head
+        temp = head.next
+        head.next = None
+        head = self.reverse(head,temp)
+        return head
+
+
+    def reverse(self,prev,next):
+        if next is None:
+            return prev
+        temp = next.next
+        next.next = prev
+        return self.reverse(next,temp)
