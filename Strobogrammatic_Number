@@ -1,0 +1,27 @@
+class Solution(object):
+    def isStrobogrammatic(self, num):
+        """
+        :type num: str
+        :rtype: bool
+        """
+        d= {"0":"0",
+            "1":"1",
+            "6":"9",
+            "8":"8",
+            "9":"6"}
+        i = 0
+        j = len(num)-1
+        for k in num:
+            if k not in d:
+                return False
+        val = True
+        while i<=j:
+            if num[i]!=d[num[i]]:
+                if num[i]!=d[num[j]]:
+                    return False
+            else:
+                if num[i]!=num[j]:
+                    return False
+            i+=1
+            j-=1
+        return True
