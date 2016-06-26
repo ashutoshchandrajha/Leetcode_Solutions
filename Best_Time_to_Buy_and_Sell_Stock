@@ -1,0 +1,23 @@
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        i = 0   #tracks minimum value
+        j = 0   #tracks maximum value after the minimum
+        k = 0
+        m = 0   #tracks maximum spread
+        if len(prices)==0:
+            return 0
+        while k<len(prices):
+            if prices[k]<prices[i]  :
+                i=k
+            if prices[k]>=prices[j]:
+                j=k
+                m = max((prices[j]-prices[i]),m)
+            if j<i:
+                j=i
+            print(i,j,k)
+            k+=1
+        return m
