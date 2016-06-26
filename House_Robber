@@ -1,0 +1,28 @@
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        d = [-1] * len(nums)
+        if len(nums)==0:
+            return 0
+        index = 0
+        return self.solutions(nums, d, index)
+
+
+    def solutions(self, nums, d, index):
+        if d[index] != -1:
+            return d[index]
+        if index == len(nums)-1:
+            d[index] = nums[index]
+            return d[index]
+        if index == len(nums)-2:
+            d[index] = max(nums[index], nums[index+1])
+            return d[index]
+        if index == len(nums) - 3:
+            d[index] = max(nums[index]+nums[index+2], nums[index+1])
+            return d[index]
+
+        d[index] = max(nums[index]+ self.solutions(nums,d,index+2), (nums[index+1]+ self.solutions(nums,d,index+3)))
+        return d[index]
