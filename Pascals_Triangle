@@ -1,0 +1,27 @@
+class Solution(object):
+    def generate(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+
+        pascal_t = []
+        if numRows == 0:
+            return pascal_t
+        if numRows == 1:
+            pascal_t = [[1]]
+            return pascal_t
+        if numRows == 2:
+            pascal_t = [[1],[1,1]]
+            return pascal_t
+        pascal_t = [[1],[1,1]]
+        for i in range(3,numRows+1):
+            pascal_t.append(self.genPascal(i,pascal_t[-1]))
+        return pascal_t
+
+    def genPascal(self,rownum,pascal_t):
+        l = [1]
+        for i in range(rownum-2):
+            l.append(pascal_t[i] + pascal_t[i+1])
+        l.append(1)
+        return l
