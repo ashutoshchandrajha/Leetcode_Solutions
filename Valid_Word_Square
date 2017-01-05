@@ -1,0 +1,15 @@
+class Solution(object):
+    def validWordSquare(self, words):
+        """
+        :type words: List[str]
+        :rtype: bool
+        """
+        for col in range(len(words)):
+            for row in range(len(words[col])):
+                try:
+                    if words[col][row]!=words[row][col]:
+                        return False
+                except:
+                    return False
+
+        return True
