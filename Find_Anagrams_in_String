@@ -1,0 +1,24 @@
+class Solution(object):
+    def findAnagrams(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: List[int]
+        """
+        positions = []
+        if len(p)>len(s):
+            return positions
+        s_vector = [0]*256
+        p_vector=[0]*256
+        for i in range(len(p)):
+            s_vector[ord(s[i])]+=1
+        for c in p:
+            p_vector[ord(c)]+=1
+        if s_vector==p_vector:
+            positions.append(0)
+        for i in range(1,len(s)-len(p)+1):
+            s_vector[ord(s[i-1])]-=1
+            s_vector[ord(s[i-1+len(p)])]+=1
+            if s_vector==p_vector:
+                positions.append(i)
+        return positions
