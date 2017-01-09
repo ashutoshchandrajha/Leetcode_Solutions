@@ -1,0 +1,36 @@
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        if len(strs) == 0:
+            return ""
+        dict_of_dict = {}
+        count = 0
+        shortest = float("inf")
+        for str in strs:
+            pos = 0
+            if len(str)==0:
+                return ""
+            while pos<len(str):
+                if pos not in dict_of_dict:
+                    dict_of_dict[pos]={}
+                if str[pos] not in dict_of_dict[pos]:
+                    dict_of_dict[pos][str[pos]] = 1
+                else:
+                    dict_of_dict[pos][str[pos]] += 1
+                pos+=1
+                if pos>count:
+                    count = pos
+            if shortest>pos:
+                shortest=pos
+        pos = 0
+        ret_str = []
+        while pos<shortest:
+            if len(dict_of_dict[pos]) != 1:
+                break
+            else:
+                ret_str.append(list(dict_of_dict[pos].keys())[0])
+            pos+=1
+        return ''.join(ret_str)
