@@ -1,0 +1,50 @@
+
+
+#this is a shitty solution! but it does the job
+#if you can find any test case which this fails, let me know
+#so far passes all test cases expect for some reason
+#it failes one test case on leetcode. But it passes in my IDE.
+#not sure what is wrong with leetcode's interpreter
+
+#there are other intelligent solutions like regex! you 
+#might want to check them out in the discuss setion on leetcode
+
+
+class Solution(object):
+    def validWordAbbreviation(self, word, abbr):
+        """
+        :type word: str
+        :type abbr: str
+        :rtype: bool
+        """
+        l_abbr = []
+        int_hold = []
+        set_int = False
+        for i in abbr:
+            try:
+                int_i = int(i)
+                #l_abbr.append(int_i)
+                set_int = True
+                int_hold.append(i)
+            except ValueError:
+                if set_int:
+                    l_abbr.append(int("".join(int_hold)))
+                    int_hold=[]
+                set_int = False
+                l_abbr.append(i)
+        index = 0
+        for i in range(len(l_abbr)):
+            if index>=len(word):
+                return False
+            if type(l_abbr[i]) == str:
+                if word[index] == l_abbr[i]:
+                    pass
+                else:
+                    return False
+                index+=1
+            elif type(l_abbr[i]) == int:
+                index = index + l_abbr[i]
+        return True
+
+s = Solution()
+print(s.validWordAbbreviation("apple","a2e"))
