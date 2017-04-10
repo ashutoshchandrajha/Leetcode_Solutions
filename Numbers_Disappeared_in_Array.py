@@ -13,7 +13,7 @@ class Solution(object):
                 r.append(i+1)
         return r
 
-    
+#O(n) and no extra space solution
 class Solution(object):
     def findDisappearedNumbers(self, nums):
         """
